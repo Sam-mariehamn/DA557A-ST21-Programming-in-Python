@@ -16,7 +16,6 @@ chosenTicket = None
 
 #Starting point to print the options available
 
-
 startingPoint = "Ticket types:\n1. Budget  ( " + str(budget) + "kr)\n2. Economy ( " + str(economy) + "kr)\n3. VIP     (" + str(vip) + "kr)\n"
 
 print(startingPoint)
@@ -25,12 +24,13 @@ print(startingPoint)
 
 while True:
 
-  ticket = int(input('Input ticket type >> '))
+  ticket = input('Input ticket type >> ')
 
-  if not 1 <= ticket <= 3:
-    print("Invalid choice\n")  
+  if not ticket.isdigit() or not 1 <= int(ticket) <= 3:
+    print("\nInvalid choice\n")  
     print(startingPoint)
   else:
+    ticket = int(ticket)
     break
 
 if ticket == 1:
@@ -54,12 +54,13 @@ print(secondSelection)
 
 while True:
 
-  bagMealSelection = int(input("Your choice >>"))
+  bagMealSelection = input("Your choice >> ")
 
-  if not 1 <= bagMealSelection <= 5:
-    print("Invalid choice\n")  
+  if not bagMealSelection.isdigit() or not 1 <= int(bagMealSelection) <= 5:
+    print("\nInvalid choice\n")  
     print(secondSelection)
-  else:
+  else:    
+    bagMealSelection = int(bagMealSelection)
 
     if bagMealSelection == 1:
       bag_count += 1
@@ -91,10 +92,10 @@ while True:
     
     elif bagMealSelection == 5:
       if bag_count > max_bags:
-        print("Too many bags! Please remove a bag.")
+        print("\nToo many bags! Please remove a bag.\n")
 
       elif meal_count > max_meals:
-        print("Too many meals! Please remove a meal")
+        print("\nToo many meals! Please remove a meal\n")
       else:
         break
 
