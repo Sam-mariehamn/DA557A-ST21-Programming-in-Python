@@ -31,14 +31,17 @@ while True:
 
 #Calculate how many of each bag fits into the truck and the total value
 
-bigCount = int(truckSize / bigVolume)
-truckSize = truckSize - bigCount * bigVolume
+while truckSize >= 80:
+  bigCount += 1
+  truckSize = truckSize - bigVolume
 
-mediumCount = int(truckSize / mediumVolume)
-truckSize = truckSize - mediumCount * mediumVolume
+while truckSize >= 50:
+  mediumCount += 1
+  truckSize = truckSize - mediumVolume
 
-smallCount = int(truckSize / smallVolume)
-truckSize = truckSize - smallCount * smallVolume
+while truckSize >= 20:
+  smallCount += 1
+  truckSize = truckSize - smallVolume
 
 totalValue = bigCount * bigValue + mediumCount * mediumValue + smallCount * smallValue
 
