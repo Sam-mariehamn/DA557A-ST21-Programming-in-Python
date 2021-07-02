@@ -12,7 +12,7 @@ def read_lines(filename):
             while i < len(listOfCars):
                 listOfCars[i] = listOfCars[i].rstrip("\n")
                 i += 1
-            
+
     # Throws an exception if the file path is wrong
     except IOError:
         print("An error occurred while trying to read the file.")
@@ -21,33 +21,43 @@ def read_lines(filename):
     return listOfCars
 
 
+# Takes a list of strings and converts it into a list of tuples
+# each tuple has 2 values, that were separated by a ':'
+# in the string
 def parse_cars(list_of_strings):
     i = 0
     listOfTuples = []
     while i < len(list_of_strings):
-        listOfTuples.append(tuple(list_of_strings[i].split(':')))
+        listOfTuples.append(list(list_of_strings[i].split(':')))
+        listOfTuples[i][1] = int(listOfTuples[i][1])
+        listOfTuples[i] = tuple(listOfTuples[i])
         i += 1
 
     return listOfTuples
-        
 
+
+# Takes the distance and the list of tuples
+# and replaces the distance with the percentage
+# of the user input for each car in the list
 def calculate_percentage(distance, cars):
     percentages = []
     for item in cars:
         percentages.append(tuple((item[0],
-        float((int(distance) / int(item[1])* 100)))))
+                           float((int(distance) / int(item[1]) * 100)))))
 
     return percentages
 
 
+# Prints the list with percentages
 def display_result(percentages):
-    print("To drive the specified distance would correspond "
-          "to this many percent of each cars specified max range.")
+    print("To drive the specified distance would correspond to this many\n"
+          "percent of each cars specified max range.")
     i = 0
     for item in percentages:
         if percentages[i][1] > 100:
-            percent = int(percentages[i][1])
-            print(format(percentages[i][0], "<37") + "-->  Distance exceeds max range ("
+            percent = int(round(percentages[i][1]))
+            print(format(percentages[i][0], "<37")
+                  + "-->  Distance exceeds max range ("
                   + str(percent) + "%)")
 
         else:
@@ -65,7 +75,9 @@ def main():
         parsedList = parse_cars(listOfCars)
         # Asks the user how far to drive
         distance = input("How far do you want to drive (kilometers) >> ")
+        # Converts the distances to percentages based on user input
         percentages = calculate_percentage(distance, parsedList)
+        # Displays the result
         display_result(percentages)
 
     else:
