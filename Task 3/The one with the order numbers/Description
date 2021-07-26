@@ -1,0 +1,93 @@
+Instructions
+
+Analyze the task below using Polyas Problem solving Technique
+Write a short analysis report using this  downloadtemplate
+Create a script named Lab3_5.py that solves the task
+Upload the script and report using the link below
+ 
+
+Task description
+
+A few weeks ago, you managed to get yourself a job at a local warehouse where you collect goods for the regular customers. Each evening you collect what the customers has ordered for the next day. It is an easy job that pays well and you are really happy about it, but there is one problem.
+
+All orders have a unique identifier called order number that consists of five digits, and you can not help yourself from trying to translate the order number into a real word each time you pick up a new order. For example, if you get the order number 78676 you might translate it into the word storm (explanation below).
+
+You always try to find a translation before you finish collecting the goods for an order but sometimes it is too tricky, and for this reason you would like to create a script that can solve the translation for you. By sheer luck it turns out that the system at work can email you a file with all the order numbers you have picked in a day.
+
+You want your script to take two filenames (full path) as command line arguments. The first argument shall be the file with the order numbers and the second argument shall be a file with words in it. The script shall look at the file with the order numbers and for each order number in the file, it shall try to find all the words that can be constructed using those digits. The words must be a proper words listed in the file linked by the second command line argument.
+
+The file with words in it shall be a regular text file with one word per line and the file with all the order numbers shall be a file that contains a pickled Python Set that stores all the order numbers as strings  
+
+ All the possible words for each order number shall be displayed on the screen using the following format:
+
+43556 : gekko
+        hello
+ 
+26453 : angle
+        anile
+        bogle
+ 
+
+The translation from digits to letters shall be done using the ITU E.161 (Links to an external site.)/ISO 9995-8 (Links to an external site.) standard. This is the same standard used when you use the keypad on a phone to translate from digits to letters. The following picture shows the translation scheme:
+
+440px-Telephone-keypad.svg.png
+
+ 
+
+Besides having a main function, the script must implement the following functions and constants:
+
+TRANSLATION
+This is a global constant that contains a dictionary. The dictionary shall store the digits 0 – 9 as keys (stored as strings) and their corresponding value shall be the letters represented by each digit according to the ITU E.161/ISO 9995-8 standard. The letters shall be stored in one string without any spaces in between the individual letters. For example, {‘2’: ‘abc’}.
+
+ read_orders(filename)
+Opens the file linked by the string filename. Using pickle the function reads, and returns the Set of order numbers stored in the file.
+
+ read_words(filename)
+Creates a list that is populated with all the words read from the file linked by the string filename. The file stores one word on each line. The list of all the words shall be returned from the function.
+
+ find_all_possible_combinations(order_number)
+The overarching goal of this function is to return all the possible combinations that can be achieved using the digits in the order_number string. The output shall be a list of strings. An example of how this function works can be seen below:
+input: ‘23’
+output: ['ad', 'ae', 'af', 'bd', 'be', 'bf', 'cd', 'ce', 'cf']
+
+Another way of looking at how this function works is to have a look at the following image:
+
+Ordernumbers.jpg
+
+ 
+
+add_digit(digit, combinations)
+This function shall be used by find_all_possible_combinations. The two parameters are the next digit to add and the current collection of combinations found. The functionality is best described with an example where we try to find all combinations for ‘23’:
+
+First call to function:
+Input: ‘2’ and []
+Output: ['a', 'b', 'c']
+Explanation: ‘2’ is the first digit in the number we want to translate and the empty list is because we do not have any previous combinations yet. The output is all the different letters we can get by translating ‘2’ into letters.
+
+ Second call to function:
+Input: ‘3’ and ['a', 'b', 'c']
+Output: ['ad', 'ae', 'af', 'bd', 'be', 'bf', 'cd', 'ce', 'cf']
+Explanation: ‘3’ is the second digit in the number we want to translate and the ['a', 'b', 'c'] is from the output in the first step, or in other words, our previously found combinations. The output is all the different combinations of letters we can get by first translating a ‘2’ and then a ‘3’.  
+
+filter_valid_words(possible_combinations, valid_words)
+The parameter possible_combinations is a list of strings that contain all the possible combinations of letters you can get from an order number and the valid_words parameter is also a list of strings but it contains all the valid, real, words read from the word list file sent as a command line argument to the script. The function shall return all combinations from possible_combinations that also exists in valid_words.
+
+display_possible_words(order_number, words)
+This function is responsible for displaying one order_number and the potential real words it can translate into. The information shall be displayed on the format described earlier in the task.
+
+ 
+
+Make sure to include error handling that displays the following message to the user if the files given as command line are not valid:
+
+Error: There was a problem with at least one of the files.
+ 
+
+Note: To pass all the automated tests you need to create and call the main function as described in this video (Links to an external site.).
+
+Hint: These files (words  download, order numbers  download) can be used as an example of how the file with the allowed real words, and the file with the order numbers might look like.
+
+Hint: This video (Links to an external site.) covering how to use command line arguments might be useful.
+
+ 
+
+This video (Links to an external site.) recorded while running the finished script showcases how the script shall look and work when finished.
