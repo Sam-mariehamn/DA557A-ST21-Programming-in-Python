@@ -16,7 +16,7 @@ def read_file(filename):
 
 def map_to_int(measurements):
     for key in measurements:
-      measurements[key] = int(measurements[key].rstrip("°"))
+        measurements[key] = int(measurements[key].rstrip("°"))
 
     return measurements
 
@@ -37,11 +37,11 @@ def find_faulty(primary, secondary, threshold):
 
 def display_warnings(faulty_sensors):
     print("Analyzis of the provided files is complete.\n"
-          "-------------------------------------------\n"
+          "-------------------------------------------\n\n"
           "The following sensors differ more than 2°:")
     for key in faulty_sensors:
         print(key)
-    
+
 
 def main():
     if len(sys.argv) == 3:
@@ -55,8 +55,8 @@ def main():
 
         display_warnings(faulty_sensors)
 
-
     else:
         print("Too few or too many arguments were given.")
+
 
 main()
