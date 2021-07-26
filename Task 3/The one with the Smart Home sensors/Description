@@ -1,0 +1,51 @@
+Instructions
+
+Analyze the task below using Polyas Problem solving Technique
+Write a short analysis report using this  downloadtemplate
+Create a script named lab3_1.py that solves the task
+Upload the script and report using the link below
+ 
+
+Task description
+Last summer you installed a Smart Home system at your parents’ place, but this move cost you a lot of headache. One of the sensors malfunction which resulted in that the indoor temperature was all over the place. One day it could be hot like in a sauna indoors and the next day you would need to wear mittens. In the end you found, and replaced, the malfunctioning sensor but it took a long time to find out what the problem was.
+
+ This year when taking a course in embedded systems you remembered the ordeal from last summer and wanted to come up with a solution. The end goal is to make the Smart Home a little bit smarter, to have it report that one of its sensors is malfunctioning. In your prototype you have installed not one, but two, of each sensor (two sensors measuring the temperature in the kitchen instead of just one). The idea is to create a script that can check if the measurements from the two sensors deviate too much, if they do, there is most likely a problem with one of the sensors.
+
+ All the measurements from the primary sensors will be stored in one file and all the measurements from the secondary sensors (the validation sensors) will be stored in another file. Each file will contain a pickled dictionary on the following format:
+
+{‘Kitchen’: ‘24°’, ’Master bedroom’: ’23°’}
+ What the script needs to do is to take the path to two of these measurement files as command line arguments and then figure out if the values from the two files deviate too much. Currently the threshold for what is too much is set to two degrees. Besides having a main function, the script needs to implement the following functions:
+
+read_file(filename)
+Shall use pickle to load the dictionary stored in the file referenced by the parameter filename. The function shall return the read dictionary.
+
+map_to_int(measurements)
+The parameter measurements is a dictionary  on the format described earlier, a tag describing where the sensor is located, and a temperature value. Note that both are strings and that the temperature value is followed by a degree sign.  This function shall create a new dictionary that contains the same tags as the measurements dictionary but where all the values are integers. An example: {'Kitchen': '20°'} shall become {'Kitchen': 20}. The new dictionary shall be returned from the function.
+
+find_faulty(primary, secondary, threshold)
+This function takes two dictionaries on the format {'Kitchen': 20} together with an integer value called threshold as parameters. The function shall compare each key-value pair in the primary dictionary to the same pair in the secondary dictionary and if the difference between the two values as greater than the threshold value, the key shall be added to a set. After having compared all the key-value pairs the set shall be returned from the function. 
+
+display_warnings(faulty_sensors)
+The faulty_sensors parameter is a set containing all the sensor tags (as strings) where the difference was too big between the primary and secondary sensors. The function shall display a message containing all the sensor tags on the following format:
+
+Analyzis of the provided files is complete.
+-------------------------------------------
+
+The following sensors differ more than 2°:
+Kitchen
+ 
+
+Make sure to include error handling that displays the following message to the user if the files given as command line arguments are not valid:
+
+Error: The files given as arguments are not valid.
+ 
+
+Note: To pass all the automated tests you need to create and call the main function as described in this (Links to an external site.) video.
+
+Hint: These two files (primary  download& secondary  download) can be used as an example of how the files with sensor readings might look like.
+
+Hint: This video (Links to an external site.) covering how to use command line arguments might be useful.
+
+ 
+
+This video (Links to an external site.) recorded while running the finished script showcases how the script shall look and work when finished.
